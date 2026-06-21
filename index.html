@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr" id="html-root">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dote_one | متجر الملابس الشبابية</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root { --bg-color: #ffffff; --text-color: #000000; --header-bg: rgba(255, 255, 255, 0.98); --card-bg: #ffffff; --border-color: #eee; }
+        .dark-mode { --bg-color: #0c0f12; --text-color: #ffffff; --header-bg: rgba(0, 0, 0, 0.95); --card-bg: #1a1a1a; --border-color: #333; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; transition: 0.3s; }
+        body { background-color: var(--bg-color); color: var(--text-color); }
+
+        header { position: fixed; top: 0; width: 100%; background: var(--header-bg); display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; z-index: 1000; border-bottom: 1px solid var(--border-color); }
+        .logo h1 { font-family: 'Cinzel', serif; font-size: 26px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--text-color); position: relative; }
+        .controls { display: flex; gap: 8px; align-items: center; }
+        .control-btn { cursor: pointer; width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--text-color); background: none; color: var(--text-color); display: flex; align-items: center; justify-content: center; }
+        
+        .hero-section { position: relative; width: 100%; aspect-ratio: 1 / 1; margin-top: 60px; background-color: #0c0f12; background-image: url('IMG-20260618-WA0003.jpg'); background-repeat: no-repeat; background-position: center; background-size: contain; display: flex; align-items: flex-end; padding: 30px 20px; }
+        .hero-text { text-align: center; width: 100%; margin-bottom: 20px; z-index: 3; }
+        .hero-btn { display: inline-block; padding: 10px 25px; border: 2px solid #fff; color: #fff; text-decoration: none; font-weight: bold; background: rgba(0,0,0,0.6); }
+
+        .products-section { padding: 40px 20px; }
+        .section-title { font-size: 20px; margin-bottom: 30px; border-right: 3px solid var(--text-color); padding-right: 10px; }
+        .video-showcase { width: 100%; aspect-ratio: 16 / 9; margin-bottom: 40px; border-radius: 4px; background-color: #000; }
+        .video-showcase video { width: 100%; height: 100%; object-fit: cover; }
+        .products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+        .product-card { background: var(--card-bg); border: 1px solid var(--border-color); padding: 10px; cursor: pointer; }
+        .product-image { width: 100%; height: 220px; object-fit: cover; }
+        
+        footer { background-color: #111; color: #fff; padding: 40px 20px; margin-top: 40px; text-align: center; }
+        .contact-buttons { display: flex; flex-direction: column; gap: 12px; max-width: 280px; margin: 0 auto 30px auto; }
+        .btn-social { padding: 12px; color: #fff; text-decoration: none; font-weight: bold; border-radius: 6px; }
+        .btn-whatsapp { background-color: #25D366; } .btn-instagram { background-color: #E1306C; } .btn-phone { background-color: #333; }
+
+        /* Modal Style */
+        .modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index: 2000; justify-content:center; align-items:center; padding: 20px; }
+        .modal-content { background: #fff; color: #000; padding: 25px; width: 100%; max-width: 400px; border-radius: 20px; }
+        .modal select, .modal input { width: 100%; padding: 12px; margin-top: 5px; border: 1px solid #ddd; border-radius: 8px; }
+        .price-box { background: #f9f9f9; padding: 15px; border-radius: 10px; margin: 20px 0; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo"><h1>DOTE_ONE</h1></div>
+        <nav><ul><li style="list-style:none;"><a href="#shop" id="nav-shop" style="color:var(--text-color); font-weight:bold; text-decoration:none;">Tshirt</a></li></ul></nav>
+        <div class="controls">
+            <button class="control-btn" onclick="toggleTheme()">🌙</button>
+            <button class="control-btn" onclick="toggleLang()" id="lang-btn">AR</button>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <div class="hero-text">
+            <h2 id="hero-title">Un nouveau concept de mode jeune</h2>
+            <a href="#shop" class="hero-btn" id="hero-btn">Parcourir</a>
+        </div>
+    </section>
+
+    <section class="products-section" id="shop">
+        <h3 class="section-title" id="sec-title-1">Vidéo de production et broderie</h3>
+        <div class="video-showcase">
+            <video autoplay muted loop playsinline><source src="VID-20260618-WA0002.mp4" type="video/mp4"></video>
+        </div>
+        <h3 class="section-title" id="sec-title-2">Collection T-shirt</h3>
+        <div class="products-grid">
+            <div class="product-card" onclick="openOrder('tshirt Night Energy', 45)">
+                <img src="IMG-20260619_021758.png" class="product-image">
+                <div class="product-info"><p>tshirt Night Energy</p><strong>45.00 DT</strong></div>
+            </div>
+            <div class="product-card" onclick="openOrder('tshirt Night Energy girl ', 45)">
+                <img src="IMG_20260619_021834.png" class="product-image">
+                <div class="product-info"><p>tshirt Night Energy girl</p><strong>45.00 DT</strong></div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <h4>DOTE_ONE</h4>
+        <div class="contact-buttons">
+            <a href="https://wa.me/21620902976" class="btn-social btn-whatsapp">Commander sur WhatsApp</a>
+            <a href="https://www.instagram.com/dote.one_off" target="_blank" class="btn-social btn-instagram">Instagram</a>
+            <a href="tel:+21620902976" class="btn-social btn-phone">Appeler</a>
+        </div>
+        <div class="rights">© 2026 Dote_One. Tous droits réservés.</div>
+    </footer>
+
+    <div class="modal" id="orderModal">
+        <div class="modal-content">
+            <h3 id="modalProductName">اسم المنتج</h3>
+            <label>اللون:</label>
+            <select id="colorSelect"><option>أبيض</option><option>أسود</option></select>
+            <label>المقاس:</label>
+            <select id="sizeSelect"><option>S</option><option>M</option><option>L</option><option>XL</option></select>
+            <label>الكمية:</label>
+            <input type="number" id="qty" value="1" min="1" oninput="calculateTotal()">
+            <div class="price-box">الإجمالي مع التوصيل (7DT): <span id="totalPrice">52</span> DT</div>
+            <button onclick="sendWhatsApp()" style="width:100%; padding:15px; background:#25D366; color:white; border:none; border-radius:8px;">إرسال الطلب</button>
+            <button onclick="document.getElementById('orderModal').style.display='none'" style="width:100%; padding:10px; margin-top:10px; border:none; background:none;">إلغاء</button>
+        </div>
+    </div>
+
+    <script>
+        let currentProduct = "", currentPrice = 0;
+        function openOrder(name, price) {
+            currentProduct = name; currentPrice = parseFloat(price);
+            document.getElementById('modalProductName').innerText = name;
+            document.getElementById('orderModal').style.display = 'flex';
+            calculateTotal();
+        }
+        function calculateTotal() {
+            let qty = document.getElementById('qty').value;
+            document.getElementById('totalPrice').innerText = (currentPrice * qty) + 7;
+        }
+        
+        // تم تصحيح دالة الواتساب لتفتح كصفحة خارجية وتتجاوز الخطأ
+        function sendWhatsApp() {
+            let m = `طلب جديد: ${currentProduct}%0Aاللون: ${document.getElementById('colorSelect').value}%0Aالمقاس: ${document.getElementById('sizeSelect').value}%0Aالكمية: ${document.getElementById('qty').value}%0Aالإجمالي: ${document.getElementById('totalPrice').innerText} DT`;
+            window.open("https://wa.me/21620902976?text=" + m, "_blank");
+        }
+        
+        function toggleLang() {
+            let isAr = document.getElementById('html-root').dir === 'rtl';
+            document.getElementById('html-root').dir = isAr ? 'ltr' : 'rtl';
+            document.getElementById('nav-shop').innerText = isAr ? 'Tshirt' : 'تيشيرت';
+            document.getElementById('lang-btn').innerText = isAr ? 'AR' : 'FR';
+            
+            // الترجمات الإضافية
+            document.getElementById('hero-title').innerText = isAr ? 'Un nouveau concept de mode jeune' : 'مفهوم جديد للملابس الشبابية';
+            document.getElementById('hero-btn').innerText = isAr ? 'Parcourir' : 'تصفح';
+            document.getElementById('sec-title-1').innerText = isAr ? 'Vidéo de production et broderie' : 'فيديو الإنتاج والتطريز';
+            document.getElementById('sec-title-2').innerText = isAr ? 'Collection T-shirt' : 'تشكيلة التيشيرتات';
+        }
+        
+        function toggleTheme() { document.body.classList.toggle('dark-mode'); }
+    </script>
+</body>
+</html>
